@@ -11,7 +11,7 @@ the project. It is __not__ meant to be a complete documentation.
 
 The global configuration is realized by two files: _/localconf.ini_ and
 _/core/config.ini_  
-_/core/config.ini_ contains the default value for each config variable.
+_/core/config.ini_ contains the default value for each config variable.  
 In _localconf.ini_ these values can be overritten for the local installation.
 
 In the source code, the configuration can be accessed, using the global variable
