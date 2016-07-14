@@ -10,7 +10,7 @@ the project. It is __not__ meant to be a complete documentation.
 # Configuration
 
 The global configuration is realized by two files: _/localconf.ini_ and
-_/core/config.ini_
+_/core/config.ini_  
 _/core/config.ini_ contains the default value for each config variable.
 In _localconf.ini_ these values can be overritten for the local installation.
 
@@ -47,8 +47,7 @@ containing information on how the m/p is to be loaded.
 
 The section __classes__ is a list of files, containing code that is not
 immediately executed (classes and functions). These files are included first
-and without a guaranteed order.
-
+and without a guaranteed order.  
 If a plugin contains classes, they should use the name of the plugin as a
 prefix, to prevent conflicts.
 
