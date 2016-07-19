@@ -36,6 +36,7 @@ class Package {
 
 	static function load ($type, $name) {
 		global $config;
+		if ($config[$type][$name]['isLoaded'] === true) return;
 		$path = $config[$type][$name];
 		if (substr($packagePath, -1) !== "/") {
 			$packagePath .= '/';
@@ -46,6 +47,7 @@ class Package {
 
 		Package::loadClasses($type, $name);
 		Package::loadExecutables($type, $name);
+		$config[$type][$name]['isLoaded'] = true;
 	}
 
 	static function loadAll () {
