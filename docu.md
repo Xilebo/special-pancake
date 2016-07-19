@@ -39,17 +39,22 @@ Plugins still can depend on each other.
 
 ## File structure of modules/plugins
 
-Every module/plugin has its own folder, containing only this m/p and everything,
+Every module/plugin has its own folder, containing the m/p and everything,
 that belongs to this m/p. In the m/p-folder has to be a file named _config.ini_
 containing information on how the m/p is to be loaded.
 
 ### [classes]
 
-The section __classes__ is a list of files, containing code that is not
-immediately executed (classes and functions). These files are included first
-and without a guaranteed order.  
-If a plugin contains classes, they should use the name of the plugin as a
-prefix, to prevent conflicts.
+The section __classes__ is a list of files, containing class definitions. These
+files are included first and without a guaranteed order.  
+Classes should use a plugin-specific prefix, to prevent conflicts.
+
+### [functions]
+
+The section __functions__ is a list of files, containing function definitions. 
+These files are included together with the classes and without a guaranteed
+order.  
+functions should use a plugin-specific prefix, to prevent conflicts.
 
 ### [execute]
 
@@ -57,3 +62,6 @@ The section __execute__ contains files to be executed, when the plugin is fully
 loaded. These files are sortet by their key, so it makes sense to give them a
 prefix to be sorted by.
 
+### [dependencies]
+
+_not implemented yet_
