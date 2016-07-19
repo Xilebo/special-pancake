@@ -1,13 +1,27 @@
 <?php 
 class Package {
 
-	private static function loadClasses($type, $name) {
+	/**
+	 * @param $type "module" or "plugin"
+	 * @param $name the name of the package
+	 * @param $category "classes" or "functions"
+	 */
+	function loadNonExecutable($type, $name, $category) {
 		global $config;
-		if (isset($config[$type][$name]['classes']) {
-			foreach ($config[$type][$name]['classes'] as $file) {
+		if (isset($config[$type][$name][$category]) {
+			foreach ($config[$type][$name][$category] as $file) {
 				include_once $config[$type][$name]['path'] . $file;
 			}
 		}
+	}
+
+	/**
+	 * @param $type "module" or "plugin"
+	 * @param $name the name of the package
+	 */
+	private static function loadClassesAndFunctions($type, $name) {
+		loadNonExecutable($type, $name, 'classes');
+		loadNonExecutable($type, $name, 'functions');
 	}
 
 	private static function loadExecutables ($type, $name) {
