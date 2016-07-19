@@ -47,5 +47,16 @@ class Package {
 		Package::loadClasses($type, $name);
 		Package::loadExecutables($type, $name);
 	}
+
+	static function loadAll () {
+		global $config;
+		foreach ($config['module'] as $name) {
+			Package::load('module', $name);
+		}
+		foreach ($config['plugin'] as $name) {
+			Package::load('plugin', $name);
+		}
+	}
+
 }
 ?>
