@@ -45,7 +45,7 @@ class Package {
 		$config[$type][$name] = parse_ini_file($path . 'config.ini', true);
 		$config[$type][$name]['path'] = $path;
 
-		Package::loadClasses($type, $name);
+		Package::loadClassesAndFunctions($type, $name);
 		Package::loadExecutables($type, $name);
 		$config[$type][$name]['isLoaded'] = true;
 	}
