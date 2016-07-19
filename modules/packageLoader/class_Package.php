@@ -6,7 +6,7 @@ class Package {
 	 * @param $name the name of the package
 	 * @param $category "classes" or "functions"
 	 */
-	function loadNonExecutable($type, $name, $category) {
+	private static function loadNonExecutable($type, $name, $category) {
 		global $config;
 		if (isset($config[$type][$name][$category]) {
 			foreach ($config[$type][$name][$category] as $file) {
