@@ -26,7 +26,7 @@ class Package {
 
 	private static function loadExecutables ($type, $name) {
 		global $config;
-		if (isset($config[$type][$name]['execute']) {
+		if (isset($config[$type][$name]['execute'])) {
 			ksort($config[$type][$name]['execute']);
 			foreach ($config[$type][$name]['execute'] as $file) {
 				registerExecutable($config[$type][$name]['path'] . $file);
