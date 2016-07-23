@@ -37,7 +37,9 @@ class Package {
 	static function load ($type, $name) {
 		global $config;
 		if (!isset($config[$type][$name])) return;
-		if ($config[$type][$name]['isLoaded'] === true) return;
+		if (isset ($config[$type][$name]['isLoaded']) && 
+				($config[$type][$name]['isLoaded'] === true)) return;
+				
 		$path = $config[$type][$name];
 		if (substr($packagePath, -1) !== "/") {
 			$packagePath .= '/';
@@ -54,12 +56,12 @@ class Package {
 	static function loadAll () {
 		global $config;
 		if (isset($config['module'])) {
-			foreach ($config['module'] as $name) {
+			foreach ($config['module'] as $name => $tmp) {
 				Package::load('module', $name);
 			}
 		}
 		if (isset($config['plugin'])) {
-			foreach ($config['plugin'] as $name) {
+			foreach ($config['plugin'] as $name => $tmp) {
 				Package::load('plugin', $name);
 			}
 		}
