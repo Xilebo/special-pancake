@@ -8,7 +8,7 @@ class Package {
 	 */
 	private static function loadNonExecutable($type, $name, $category) {
 		global $config;
-		if (isset($config[$type][$name][$category]) {
+		if (isset($config[$type][$name][$category])) {
 			foreach ($config[$type][$name][$category] as $file) {
 				include_once $config[$type][$name]['path'] . $file;
 			}
