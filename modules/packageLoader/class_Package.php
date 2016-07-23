@@ -19,8 +19,8 @@ class Package {
 	 * @param $name the name of the package
 	 */
 	private static function loadClassesAndFunctions($type, $name) {
-		loadNonExecutable($type, $name, 'classes');
-		loadNonExecutable($type, $name, 'functions');
+		Package::loadNonExecutable($type, $name, 'classes');
+		Package::loadNonExecutable($type, $name, 'functions');
 	}
 
 	private static function loadExecutables ($type, $name) {
