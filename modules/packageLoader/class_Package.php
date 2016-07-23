@@ -8,10 +8,9 @@ class Package {
 	 */
 	private static function loadNonExecutable($type, $name, $category) {
 		global $config;
-		if (isset($config[$type][$name][$category])) {
-			foreach ($config[$type][$name][$category] as $file) {
-				include_once $config[$type][$name]['path'] . $file;
-			}
+		if (!isset($config[$type][$name][$category])) return;
+		foreach ($config[$type][$name][$category] as $file) {
+			include_once $config[$type][$name]['path'] . $file;
 		}
 	}
 
@@ -26,6 +25,7 @@ class Package {
 
 	private static function loadExecutables ($type, $name) {
 		global $config;
+		if (!isset($config[$type][$name])) return;
 		if (isset($config[$type][$name]['execute'])) {
 			ksort($config[$type][$name]['execute']);
 			foreach ($config[$type][$name]['execute'] as $file) {
@@ -36,6 +36,7 @@ class Package {
 
 	static function load ($type, $name) {
 		global $config;
+		if (!isset($config[$type][$name])) return;
 		if ($config[$type][$name]['isLoaded'] === true) return;
 		$path = $config[$type][$name];
 		if (substr($packagePath, -1) !== "/") {
@@ -52,11 +53,15 @@ class Package {
 
 	static function loadAll () {
 		global $config;
-		foreach ($config['module'] as $name) {
-			Package::load('module', $name);
+		if (isset($config['module']) {
+			foreach ($config['module'] as $name) {
+				Package::load('module', $name);
+			}
 		}
-		foreach ($config['plugin'] as $name) {
-			Package::load('plugin', $name);
+		if (isset($config['plugin']) {
+			foreach ($config['plugin'] as $name) {
+				Package::load('plugin', $name);
+			}
 		}
 	}
 
