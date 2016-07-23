@@ -53,12 +53,12 @@ class Package {
 
 	static function loadAll () {
 		global $config;
-		if (isset($config['module']) {
+		if (isset($config['module'])) {
 			foreach ($config['module'] as $name) {
 				Package::load('module', $name);
 			}
 		}
-		if (isset($config['plugin']) {
+		if (isset($config['plugin'])) {
 			foreach ($config['plugin'] as $name) {
 				Package::load('plugin', $name);
 			}
