@@ -59,8 +59,18 @@ class Log {
 		}
 		return $result;
 	}
-	
-	
+
+	function getErrors() {
+		return $this->errors;
+	}
+
+	function getWarnings() {
+		return $this->warnings;
+	}
+
+	function getMessages() {
+		return $this->messages;
+	}
 
 	function toJson() {
 		$data = array();
