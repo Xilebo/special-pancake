@@ -38,8 +38,8 @@ In the source code, the configuration can be accessed, using the global variable
 _$config_.
 
 Modules and plugins have their own config.ini file. Its content is stored in the
-global $config under the name of the m/p. Config-variables of m/ps that are
-not stored in subsections, can be overwritten via the localconf.ini.
+global $config, using the key, it was registered under (i.e. where previously 
+just stood the path). 
 
 ## File structure of modules/plugins
 
