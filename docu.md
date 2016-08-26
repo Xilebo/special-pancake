@@ -70,21 +70,20 @@ _not implemented yet_
 
 ## Package Loader
 
-### Summary
-
 The Package Loader loads all the packages - that is modules and plugins. In
 addition to the normal structure, it needs a file called bootstrap.php, which
 loads the packageloader. It than offers a class called _Package_ that can be
 used to load other packages.
 
-### Package::load($type, $name)
+#### Package::load($type, $name)
 
 Loads a specific package registered in config.ini or localconf.ini. 
  * $type can be either 'module' or 'plugin'.
  * $name is the name, under which the package is registered in the configuration.
 
-### Package::loadAll()
+#### Package::loadAll()
 
 Scans all the packages, registered in either config.ini or localconf.ini and
 loads them. This is executed once in the index.php, so probably you should not
 need to load anything by hand.
+
