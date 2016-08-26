@@ -7,16 +7,6 @@ http://daringfireball.net/projects/markdown/syntax
 This document is meant to contain vital notes to understand the structure of
 the project. It is __not__ meant to be a complete documentation.
 
-# Configuration
-
-The global configuration is realized by two files: _/localconf.ini_ and
-_/core/config.ini_  
-_/core/config.ini_ contains the default value for each config variable.  
-In _localconf.ini_ these values can be overritten for the local installation.
-
-In the source code, the configuration can be accessed, using the global variable
-_$config_.
-
 # The core, modules and plugins - an overview
 
 ## The core
@@ -36,6 +26,20 @@ just overwrite the given path with the path of your own module.
 Plugins are packages, that add additional features, but are not needed for the
 project to work. They can be added and removed at will. Be careful though.
 Plugins still can depend on each other.
+
+## Configuration
+
+The global configuration is realized by two files: _/localconf.ini_ and
+_/core/config.ini_  
+_/core/config.ini_ contains the default value for each config variable.  
+In _localconf.ini_ these values can be overwritten for the local installation.
+
+In the source code, the configuration can be accessed, using the global variable
+_$config_.
+
+Modules and plugins have their own config.ini file. Its content is stored in the
+global $config under the name of the m/p. Config-variables of m/ps that are
+not stored in subsections, can be overwritten via the localconf.ini.
 
 ## File structure of modules/plugins
 
