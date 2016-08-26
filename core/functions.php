@@ -25,6 +25,16 @@ function getFiles($path, $type)
 	}
 }
 
+function loadGlobalConfig() {
+	global $config;
+	$config = array_merge($config, parse_ini_file('core/config.ini', true)); 
+}
+
+function loadLocalConfig() {
+	global $config;
+	$config = array_merge($config, parse_ini_file('localconf.ini', true)); 
+}
+
 function addTabStops($text, $tabCount) {
 	$tab = '	';
 

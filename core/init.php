@@ -1,8 +1,8 @@
 <?php
 
-// in case of conflict, localconf overwrites global config
-$config = parse_ini_file('core/config.ini', true);
-$config = array_merge($config,parse_ini_file('localconf.ini', true)); 
+$config = array();
+loadGlobalConfig();
+loadLocalConfig();
 
 // add trailing '/'
 if (isset($config['module'])) {
