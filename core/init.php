@@ -12,6 +12,13 @@ if (isset($config['module'])) {
 		}
 	}
 }
+if (isset($config['plugin'])) {
+	foreach ($config['plugin'] as $key => $value) {
+		if (substr($value, -1) !== "/") {
+			$config['plugin'][$key] = $value . '/';
+		}
+	}
+}
 
 $executables = array();
 
