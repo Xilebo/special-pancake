@@ -28,7 +28,8 @@ class Page {
 
 		$this->positions = array(
 				$this->positionHead => 1,
-				$this->positionBody => 1);
+				$this->positionBody => 1
+		);
 
 		$this->reloadFrame();
 
