@@ -41,37 +41,6 @@ class Page {
 		$this->addJsFolder($config['path']['javascript']);
 	}
 
-	private function getPositionTag($position) {
-		$position = strtoupper($position);
-		return $this->openPosition . $position . $this->closePosition;
-	}
-
-	private function getTemplate($templateName) {
-		global $config;
-
-		$templateContent = "";
-		// TODO check if file exists
-		try {
-			$filename = $config['path']['templates'] . $templateName . ".html";
-			$handle = fopen($filename, "r");
-			$templateContent = fread($handle, filesize($filename));
-		} catch (Exception $e) {
-			Log::getLog()->logError($e, $this->module);
-		}
-		if (get_resource_type($handle) === 'file') {
-			fclose($handle);
-		}
-		return $templateContent;
-	}
-
-	private function applyConfigData() {
-		global $config;
-
-		$this->replacePosition('LANGUAGE', $config['language']);
-		$this->replacePosition('CHARSET', $config['html']['charset']);
-		$this->replacePosition('TITLE', $config['html']['title']);
-	}
-
 	/**
 	 * This changes the currently used frame template. Previous changes 
 	 * to the page content are lost.
@@ -79,7 +48,7 @@ class Page {
 	 * without the postfix. E.g. if $template is "main" the file
 	 * "[templatePath]/main.html" will be used.
 	 */
-	function setFrame($template) {
+	public function setFrame($template) {
 		self::$frameTemplate = $template;
 		self::getPage()->reloadFrame();
 	}
@@ -87,7 +56,7 @@ class Page {
 	/**
 	 * This reloads the template, effectively resetting the content.
 	 */
-	function reloadFrame() {
+	public function reloadFrame() {
 		$this->content = $this->getTemplate(self::$frameTemplate);
 		$this->applyConfigData();
 	}
@@ -161,18 +130,6 @@ class Page {
 		// TODO unregister position
 	}
 
-	private function removeAllPositions() {
-		/*
-		 * This function is called _after_ the log was integrated into the
-		 * page. Logged messages from this function may not be displayed.
-		 */
-		$open = regexEscape($this->openPosition);
-		$close = regexEscape($this->closePosition);
-		// (?U) = ungreedy from this point on
-		$regex = '/[\\n\\s]*' . $open . '.*(?U)' . $close . '/';
-		$this->content = preg_replace($regex, '', $this->content);
-	}
-
 	public function addToHead($rawText) {
 		$this->addRawHtml($rawText, $this->positionHead);
 	}
@@ -203,10 +160,53 @@ class Page {
 		$this->content = str_ireplace($position, $rawText, $this->content);
 	}
 
-	function send() {
+	public function send() {
 		Log::getLog()->transferToJs();
 		$this->removeAllPositions();
 		echo $this->content;
+	}
+
+	private function removeAllPositions() {
+		/*
+		 * This function is called _after_ the log was integrated into the
+		 * page. Logged messages from this function may not be displayed.
+		 */
+		$open = regexEscape($this->openPosition);
+		$close = regexEscape($this->closePosition);
+		// (?U) = ungreedy from this point on
+		$regex = '/[\\n\\s]*' . $open . '.*(?U)' . $close . '/';
+		$this->content = preg_replace($regex, '', $this->content);
+	}
+
+	private function getPositionTag($position) {
+		$position = strtoupper($position);
+		return $this->openPosition . $position . $this->closePosition;
+	}
+
+	private function getTemplate($templateName) {
+		global $config;
+
+		$templateContent = "";
+		// TODO check if file exists
+		try {
+			$filename = $config['path']['templates'] . $templateName . ".html";
+			$handle = fopen($filename, "r");
+			$templateContent = fread($handle, filesize($filename));
+		} catch (Exception $e) {
+			Log::getLog()->logError($e, $this->module);
+		}
+		if (get_resource_type($handle) === 'file') {
+			fclose($handle);
+		}
+		return $templateContent;
+	}
+
+	private function applyConfigData() {
+		global $config;
+
+		$this->replacePosition('LANGUAGE', $config['language']);
+		$this->replacePosition('CHARSET', $config['html']['charset']);
+		$this->replacePosition('TITLE', $config['html']['title']);
 	}
 
 }
