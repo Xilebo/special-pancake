@@ -46,7 +46,7 @@ class Package {
 		}
 
 		$config[$type][$key] = parse_ini_file($path . 'config.ini', true);
-		loadLocalConfig(); 
+		loadLocalConfig();
 		$config[$type][$key]['path'] = $path;
 
 		Package::loadClassesAndFunctions($type, $key);
